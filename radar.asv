@@ -1,19 +1,21 @@
 classdef radar
     %雷达对象
     properties
+        v;
+        D;
         PRF;
         fc;
-        kr;
-        tr;
+        del;
+        tao;
     end
     methods
         function obj = radar()
             %构造此类的实例
             % 此处显示详细说明
-            obj.fc = 1*10^9;
-            obj.PRF = 57.6;
-            obj.kr = 6*10^12;
-            obj.tr = 5*10^-6;
+            obj.v = 100;
+            obj.h = 5000;
+            obj.D = 4;
+            obj.fc =  
         end
     end
 end

@@ -1,10 +1,9 @@
-classdef radar
-    %雷达对象
+classdef platform
+    %飞行平台
     properties
-        PRF;
-        fc;
-        kr;
-        tr;
+        v;
+        h;
+        angle;
     end
     methods
         function obj = radar()
@@ -17,4 +16,3 @@ classdef radar
         end
     end
 end
-
