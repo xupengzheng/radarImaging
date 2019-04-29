@@ -4,15 +4,16 @@ classdef platform
         v;
         h;
         angle;
+        R0;
     end
     methods
-        function obj = radar()
+        function obj = platform(v,R0)
             %构造此类的实例
             % 此处显示详细说明
-            obj.fc = 1*10^9;
-            obj.PRF = 57.6;
-            obj.kr = 6*10^12;
-            obj.tr = 5*10^-6;
+            obj.v = v;
+            obj.R0 = R0;
+            obj.h = 5000;
+            obj.angle = 1.1071;
         end
     end
 end
