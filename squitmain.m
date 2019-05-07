@@ -21,12 +21,12 @@ antenasight = c/mradar.fc/D;
 sightrange = 2*r0*tan(antenasight/2)
 vm = 200;
 rwcr = vm*sind(squitangle)
-% Bfd = 1*vm/D
 Bfd = 2*vm/D
 fdc = 2*vm*sind(squitangle)*mradar.fc/c;
 kd = 2*vm^2*cosd(squitangle)^2*mradar.fc/c/r0
 crossRrs = vm*1/Bfd
 acclong = sightrange/vm
+fsfd = 2*Bfd
 %% 成像场景
 dx = 60;  %x像素间距10m
 dy = 60;  %y像素间距10m
@@ -43,7 +43,7 @@ t = 0:1/(mradar.fr):T;
 centerx = (col+1)/2;
 centery = (row+1)/2;
 HRRPS = [];
-tmf = -1.25*acclong/2:1/3/Bfd: 1.25*acclong/2;
+tmf = -1.25*acclong/2:1/fsfd: 1.25*acclong/2;
 for tm = tmf  %不同角度
 st = s(t);
 sr = zeros(size(t));
@@ -81,14 +81,14 @@ end
 %% 距离走动校正
 figure;imagesc(c*t(1:size(HRRPS,2))/2,tmf,abs(HRRPS));xlabel('距离/m');ylabel('tm');
 HRRPSout = rwc(HRRPS,tmf,rwcr);
-figure;imagesc(c*t(1:size(HRRPSout,2))/2,1/3/Bfd*(1:size(HRRPSout,1))*vm,abs(HRRPSout));xlabel('距离/m');ylabel('tm');
+figure;imagesc(c*t(1:size(HRRPSout,2))/2,1/fsfd*(1:size(HRRPSout,1))*vm,abs(HRRPSout));xlabel('距离/m');ylabel('tm');
 %% 方位向匹配滤波
-srftm = -1*acclong/2:1/3/Bfd: 1*acclong/2;
+srftm = -1*acclong/2:1/fsfd: 1*acclong/2;
 srf = exp(-2*pi*1j*0.5*kd*srftm.^2+2*pi*1j*fdc*srftm);
-HRRPSZ = [zeros(floor(3*Bfd*acclong/2),size(HRRPSout,2));HRRPSout];
+HRRPSZ = [zeros(floor(fsfd*acclong/2),size(HRRPSout,2));HRRPSout];
 sarimage = matchfilter(HRRPSZ,srf,1);
- figure;plot(1/3/Bfd*(1:size(sarimage,1))*vm,abs(sarimage(:,432)))
+ figure;plot(1/fsfd*(1:size(sarimage,1))*vm,abs(sarimage(:,432)))
  sarscreen = sarimage(1:size(HRRPS,1),:);
  figure;imagesc(c*t(1:size(HRRPSout,2))/2,tmf,abs(HRRPSout));xlabel('距离/m');ylabel('tm');
-figure;imagesc(c*t(1:size(HRRPS,2))/2,1/3/Bfd*(1:size(sarscreen,1))*vm,abs(sarscreen));xlabel('距离/m');ylabel('方位/m');
+figure;imagesc(c*t(1:size(HRRPS,2))/2,1/fsfd*(1:size(sarscreen,1))*vm,abs(sarscreen));xlabel('距离/m');ylabel('方位/m');
 
