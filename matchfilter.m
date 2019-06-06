@@ -5,7 +5,7 @@ if (dim == 1)
     sig = sig.';
 end
 [nr,nc] = size(sig);
-fftnum =4*nc;
+fftnum = nc;
 fftsrf = fft(srf,fftnum);
 cfftsrf = ones(nr,1)*conj(fftsrf);
 sigfft = fft(sig,fftnum,2);

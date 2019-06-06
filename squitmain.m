@@ -26,7 +26,7 @@ fdc = 2*vm*sind(squitangle)*mradar.fc/c;
 kd = 2*vm^2*cosd(squitangle)^2*mradar.fc/c/r0
 crossRrs = vm*1/Bfd
 acclong = sightrange/vm
-fsfd = 2*Bfd
+fsfd = 1*Bfd
 %% 成像场景
 dx = 60;  %x像素间距10m
 dy = 60;  %y像素间距10m
@@ -35,7 +35,7 @@ screen = [0 0 0 0 0
           1 0 1 0 1 ;
           0 0 0 0 0;
           1 0 1 0 1;]
-imwrite(screen,'screen.bmp','bmp');
+imwrite(1-screen,'screen.bmp','bmp');
 figure;imshow(mat2gray(abs(screen)));title('成像场景');
 %% 回波仿真
 t = 0:1/(mradar.fr):T;
