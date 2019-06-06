@@ -78,6 +78,7 @@ sr = zeros(size(t));
     %figure;plot(angle(result));title([num2str(theta) '度匹配滤波结果相位']);
 end
 figure;imagesc(c*t(indexrange)/2,thetasweep,HRRPS);xlabel('距离/m');ylabel('theta');
+
 % for theta = thetasweep  %不同角度
 %     figure;plot(c*t(indexrange)/2,HRRPS(theta/thetagap+1,:));title([num2str(theta) '度HRRP']);
 % end
